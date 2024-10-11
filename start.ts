@@ -1,7 +1,7 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
 import cors from 'cors'
-import { Cors, config, connectToDB } from './Config/index.config';
-import { sensorRouter } from './Resources/index.resources';
+import { Cors, config, connectToDB } from './index.config';
+import { sensorRouter } from './router';
 
 
 export const Leak: Express = express();
@@ -11,7 +11,7 @@ Leak.use(express.json());
 Leak.use(express.urlencoded({ extended: true }));
 Leak.use(cors(LeakCors.corsOptions))
 
-Leak.use('/api/v1/app/versions', sensorRouter)
+Leak.use('/api/v1/app/sensors', sensorRouter)
 
 Leak.use((req: Request, res: Response, next: NextFunction) => {
     return res.status(404).json({ message: 'This Request does not sit with Retty API' });
