@@ -1,6 +1,7 @@
-import { Gpio } from 'onoff';  
+// import { Gpio } from 'onoff';  
 
-const sensorPin = new Gpio(4, 'in', 'both'); 
+// const sensorPin = new Gpio(4, 'in', 'both'); 
+const sensorPin = {} as any;
 
 export const getSensorData = async () => {
     return new Promise((resolve, reject) => {
