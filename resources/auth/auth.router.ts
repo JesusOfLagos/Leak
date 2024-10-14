@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { AuthController } from './auth.controller';
-import { Authenticator } from '../../Config/authenticator';
+import { Authenticator } from '../../config/authenticator';
 import { Request, Response } from 'express';
 
 export const authRouter = Router();
