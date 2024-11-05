@@ -12,7 +12,7 @@ export async function fetchData(): Promise<any> {
         const response = await axios.get(BASE_URL, {
             headers: { 'X-AIO-Key': AIO_KEY }
         });
-        console.log('Fetched data:', response.data);
+        return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
