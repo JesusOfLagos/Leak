@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { getLeakStatus, triggerLeakAlert } from './sensor.controller';
+import { getFeeds } from './sensor';
 
 export const sensorRouter = Router();
 
-sensorRouter.get('/status', getLeakStatus);  
-sensorRouter.post('/alert', triggerLeakAlert);  
+sensorRouter.get('/status', getFeeds);  
+

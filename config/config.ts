@@ -71,6 +71,9 @@ export const config = Object.freeze({
   },
   keys: {
     googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY as string,
+    aio_key: process.env.AIO_KEY as string,
+    aio_username: process.env.USER_NAME as string,
+    aio_feed_key: process.env.FEED_KEY
   },
 });
 

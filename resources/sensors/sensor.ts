@@ -1,19 +1,32 @@
-// import { Gpio } from 'onoff';  
+import { Request, Response } from 'express';
+import { fetchData } from './sensor.services';
 
-// const sensorPin = new Gpio(4, 'in', 'both'); 
-const sensorPin = {} as any;
+interface Feed {
+    id: number;
+    name: string;
+    lastValue: string;
+    status: string;
+    createdAt: string;
+    updatedAt: string;
+}
 
-export const getSensorData = async () => {
-    return new Promise((resolve, reject) => {
-        sensorPin.read((err, value) => {
-            if (err) {
-                reject(err);
-            }
-            resolve({ isLeaking: value === 1 });
-        });
-    });
+const formatFeedData = (rawData: any[]): Feed[] => {
+    return rawData.map(feed => ({
+        id: feed.id,
+        name: feed.name,
+        lastValue: feed.last_value,
+        status: feed.status,
+        createdAt: feed.created_at,
+        updatedAt: feed.updated_at,
+    }));
 };
 
-export const alertLeak = async () => {
-    console.log('Leak detected! Triggering alert...');
+export const getFeeds = async (req: Request, res: Response) => {
+    try {
+        const rawFeeds = await fetchData();
+        const structuredFeeds = formatFeedData(rawFeeds);
+        res.json(structuredFeeds);
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
 };

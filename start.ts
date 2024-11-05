@@ -3,6 +3,8 @@ import cors from 'cors'
 import { Cors, config, connectToDB } from './config/index.config';
 import { sensorRouter } from './resources/sensors/sensor.router';
 import { authRouter } from './resources/auth/auth.router';
+import { fetchData } from './resources/sensors/sensor.services';
+
 
 
 
@@ -25,7 +27,13 @@ Leak.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
     res.status(500).json({ message: 'Internal Server Error' });
 });
+
+
+fetchData();
+
+
 connectToDB();
 Leak.listen(config.app.port, () => {
     console.log(`Server started on port ${config.app.port}`);
 })
+
