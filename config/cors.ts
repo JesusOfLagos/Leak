@@ -3,7 +3,7 @@ import cors, { CorsOptions } from 'cors';
 
 export class Cors {
     public corsOptions: CorsOptions = {
-        origin: ['*'],
+        origin: ['https://ubiquitous-meerkat-c2d8e5.netlify.app', 'http://localhost:3000/'],
         optionsSuccessStatus: 200,
         credentials: true,
         methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
