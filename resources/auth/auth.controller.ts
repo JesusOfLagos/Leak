@@ -33,8 +33,8 @@ export class AuthController {
             const newUser = new User({
                 email: data.email,
                 password: hashedPassword,
-                firstName: data.firstname,
-                lastName: data.lastname,
+                firstname: data.firstname,
+                lastname: data.lastname,
                 phone: data.phone,
             })
             const savedUser = await newUser.save();
