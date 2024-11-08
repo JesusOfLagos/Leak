@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import { fetchData } from './sensor.services';
+import { sendMail } from '../../config/mail';
+
+
 
 interface Feed {
     id: number;
@@ -21,11 +24,20 @@ const formatFeedData = (rawData: any[]): Feed[] => {
     }));
 };
 
-export const getFeeds = async (req: Request, res: Response) => {
+export const getFeeds = async (req: any, res: Response) => {
     try {
+        const userEmail = req.user.email;
         const rawFeeds = await fetchData();
         const structuredFeeds = formatFeedData(rawFeeds);
-        res.json(structuredFeeds);
+        const subject = 'Sensor Update';
+        const text = 'Most recent sensor data';
+        const to = userEmail;
+        const mailSent = sendMail(subject, text, to);
+        let error = '';
+        if (!mailSent) {
+            error = 'Error sending email';
+        }
+        res.json({ structuredFeeds, error });
     } catch (error) {
         res.status(500).json({ error });
     }
