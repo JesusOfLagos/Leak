@@ -9,11 +9,17 @@ import { fetchData } from './resources/sensors/sensor.services';
 
 
 export const Leak: Express = express();
-const leakCors = new Cors;
+// const leakCors = new Cors;
 
 Leak.use(express.json());
 Leak.use(express.urlencoded({ extended: true }));
-Leak.use(cors(leakCors.corsOptions))
+Leak.use(cors(
+    {
+        origin: '*',
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE']
+    }
+));
 
 Leak.use('/api/v1/app/sensors', sensorRouter)
 Leak.use('/api/v1/auth', authRouter)
