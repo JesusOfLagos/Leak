@@ -35,7 +35,7 @@ Leak.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 
-fetchData();
+fetchData()
 
 
 connectToDB();

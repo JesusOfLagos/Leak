@@ -30,7 +30,10 @@ export const getFeeds = async (req: any, res: Response) => {
         const rawFeeds = await fetchData();
         const structuredFeeds = formatFeedData(rawFeeds);
         const subject = 'Sensor Update';
-        const text = 'Most recent sensor data';
+        const text = `Most recent sensor data: ${JSON.stringify(structuredFeeds)}
+        
+        Regards,
+        Leak Detection Team.`;
         const to = userEmail;
         const mailSent = sendMail(subject, text, to);
         let error = '';
